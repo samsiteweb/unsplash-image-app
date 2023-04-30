@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '../helper/button';
-import SearchInput from '../helper/search';
+import SearchBar from '../helper/search';
 
 import {
     Container
@@ -9,8 +9,7 @@ import {
 const Navbar:React.FC = ()=> (
     <>
       <Container>
-        
-        <SearchInput placeholder='Search by name' />
+        <SearchBar placeholder='Search by name' onChange={() => {}} />
         <Button primary >Add a photo</Button>
       </Container>
     </>

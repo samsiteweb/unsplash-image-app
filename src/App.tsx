@@ -4,7 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 const  App: React.FC = () => {
   return (
-    <ChakraProvider>
+    <ChakraProvider>       
        <Navbar/>
     </ChakraProvider>
   );

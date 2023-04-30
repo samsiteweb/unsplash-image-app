@@ -1,63 +1,57 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-interface SearchInputProps {
-  placeholder?: string;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+interface SearchBarProps {
+  placeholder: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SearchInputWrapper = styled.div`
-  position: relative;
+const SearchBarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #ffffff;
+  box-sizing: border-box;
   width: 300px;
   height: 55px;
-  margin: 0 auto;
-`;
-
-const SearchInputIcon = styled.div`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 16px;
-  color: black;
-  background-color: black;
-`;
-
-const SearchInputField = styled.input`
-  width: 100%;
-  height: 100%;
-  padding: 0 20px 0 40px;
-  border: none;
-  border-radius: 12px;
-  box-sizing: border-box;
-  font-size: 16px;
-  font-weight: 500;
-  background-color: #fff;
   border: 1px solid #bdbdbd;
+  border-radius: 12px;
   filter: drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.1));
+`;
 
-  &::placeholder {
-    color: #bdbdbd;
-    opacity: 1;
-  }
+const SearchIcon = styled.span`
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  margin-right: 10px;
+`;
 
-  &:focus {
-    outline: none;
-    border: 2px solid #d6d6d6;
-  }
-}`
+const SearchInput = styled.input`
+  border: none;
+  outline: none;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+`;
 
-const SearchInput: React.FC<SearchInputProps> = ({ placeholder, onChange }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ placeholder, onChange }) => {
   return (
-    <SearchInputWrapper>
-      <SearchInputIcon>
-      </SearchInputIcon>
-      <SearchInputField
-        type="text"
-        placeholder={placeholder}
-        onChange={onChange}
-      />
-    </SearchInputWrapper>
+    <SearchBarContainer>
+      <SearchIcon className="material-icons">search</SearchIcon>
+      <SearchInput type="text" placeholder={placeholder} onChange={onChange} />
+    </SearchBarContainer>
   );
 };
 
-export default SearchInput;
+export default SearchBar;
