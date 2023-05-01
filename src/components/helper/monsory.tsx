@@ -1,7 +1,7 @@
 import React from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import styled from "styled-components";
-import Button from '../helper/button';
+import {DangerOutlineButton} from '../helper/button'
 
 const ImageContainer = styled.div`
   margin: 10px;
@@ -9,7 +9,6 @@ const ImageContainer = styled.div`
   border-radius: 16px;
   overflow: hidden;
   transition: all 0.2s ease-in-out;
-
   &:hover {
     border-radius: 24px;
   }
@@ -34,9 +33,9 @@ const ImageLabel = styled.div`
   left: 10px;
 `;
 
-const DeleteButton = styled(Button)`
- 
-  top: 50px;
+const DeleteButton = styled(DangerOutlineButton)`
+top: 10px;
+right: 10px;
 `;
 
 const ImageOverlay = styled.div`
@@ -64,7 +63,8 @@ const ImageOverlay = styled.div`
   }
 
   & > ${DeleteButton} {
-   
+    align-self: flex-end;
+    margin: 10px 30px;
   }
   
   & > ${ImageLabel} {
@@ -94,7 +94,7 @@ const ImageMasonry: React.FC<ImageMasonryProps> = ({ images, onImageDelete }) =>
             <Image src={image.src} alt={image.label} />
             <ImageOverlay>
               <ImageLabel>{image.label}</ImageLabel>
-              <DeleteButton dangerOutline onClick={() => handleImageDelete(index)}>
+              <DeleteButton onClick={() => handleImageDelete(index)}>
                 delete
               </DeleteButton>
             </ImageOverlay>

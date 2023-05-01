@@ -1,6 +1,5 @@
-import React from 'react'
-import Button from '../helper/button';
-import SearchBar from '../helper/search';
+import React, { useState } from 'react'
+import { PrimaryButton as AddImageButton } from '../helper/button';
 import myUnsplashLogo from '../../assets/my_unsplash_logo.svg';
 
 import {
@@ -8,18 +7,33 @@ import {
     Logo,
     LogoAndSearchBarContainer
 } from "./styles"
+import { AddImageModal } from '../Modals/addImageModal';
+import CustomInput from '../helper/customInput';
 
 
-const Navbar:React.FC = ()=> (
+const Navbar:React.FC = ()=> {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleOpenModal = () => {
+      setIsOpen(true);
+    };
+  
+    const handleCloseModal = () => {
+      setIsOpen(false);
+    };
+
+return(
     <>
       <Container>
         <LogoAndSearchBarContainer>
             <Logo src={myUnsplashLogo} alt="" />
-            <SearchBar placeholder='Search by name' onChange={() => {}} />
+            <CustomInput icon='search' placeholder='Search by name' onChange={() => {}} />
         </LogoAndSearchBarContainer>
-        <Button primary >Add a photo</Button>
+        <AddImageButton onClick={handleOpenModal} >Add a photo</AddImageButton>
       </Container>
+      <AddImageModal isOpen={isOpen} handleCloseModal={handleCloseModal} />
     </>
   )
+}
   
   export default Navbar;

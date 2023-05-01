@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import Button from '../helper/button';
 
 export const LogoAndSearchBarContainer = styled.div`
     display: flex;
@@ -16,15 +15,6 @@ export const Container = styled.div`
     justify-content: space-between;
     padding: 20px;
     `
-
-export const ButtonNew = styled(Button)`
-    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    width: 250px;
-    height: 55px;
-`
 
 export const btn = styled.button`
   background-color: #4CAF50;

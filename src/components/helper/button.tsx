@@ -23,7 +23,7 @@ const ButtonBase = css`
   }
 `;
 
-const PrimaryButton = styled.button<ButtonProps>`
+export const PrimaryButton = styled.button<ButtonProps>`
   ${ButtonBase};
   color: white;
   background: #3DB46D;
@@ -48,7 +48,14 @@ const PrimaryButton = styled.button<ButtonProps>`
         `}
 `;
 
-const DangerOutlineButton = styled.button<ButtonProps>`
+export const BorderLessButton = styled.button<ButtonProps>`
+${ButtonBase};
+    background: none;
+    width: 137px;
+    color: #BDBDBD;
+`
+
+export const DangerOutlineButton = styled.button<ButtonProps>`
   ${ButtonBase};
     color: #EB5757;
     background-color: transparent;
@@ -74,34 +81,37 @@ const DangerOutlineButton = styled.button<ButtonProps>`
             box-shadow: none;
           }
         `}
+        @media (max-width: 768px) {
+            height: 23px;
+          }
 `;
 
-const Button: React.FC<ButtonProps> = ({
-    primary,
-    dangerOutline,
-    disabled,
-    children,
-    onClick,
-}) => {
-    if (primary) {
-        return (
-            <PrimaryButton onClick={onClick} disabled={disabled}>
-                {children}
-            </PrimaryButton>
-        );
-    }
-    if (dangerOutline) {
-        return (
-            <DangerOutlineButton onClick={onClick} disabled={disabled}>
-                {children}
-            </DangerOutlineButton>
-        );
-    }
-    return (
-        <PrimaryButton onClick={onClick} disabled={disabled}>
-            {children}
-        </PrimaryButton>
-    );
-};
+// const Button: React.FC<ButtonProps> = ({
+//     primary,
+//     dangerOutline,
+//     disabled,
+//     children,
+//     onClick,
+// }) => {
+//     if (primary) {
+//         return (
+//             <PrimaryButton onClick={onClick} disabled={disabled}>
+//                 {children}
+//             </PrimaryButton>
+//         );
+//     }
+//     if (dangerOutline) {
+//         return (
+//             <DangerOutlineButton onClick={onClick} disabled={disabled}>
+//                 {children}
+//             </DangerOutlineButton>
+//         );
+//     }
+//     return (
+//         <PrimaryButton onClick={onClick} disabled={disabled}>
+//             {children}
+//         </PrimaryButton>
+//     );
+// };
 
-export default Button;
+// export default Button;
