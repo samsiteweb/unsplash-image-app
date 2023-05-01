@@ -1,13 +1,19 @@
-import React from 'react'
-
-
 import styled from "styled-components"
 import Button from '../helper/button';
-// import { ButtonComponent } from '../helper/button'
+
+export const LogoAndSearchBarContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`
+export const Logo = styled.img`
+    margin-right: 30px;
+`
 
 export const Container = styled.div`
     display: flex;
-    align-items: center;
+    justify-content: space-between;
     padding: 20px;
     `
 

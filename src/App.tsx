@@ -1,12 +1,17 @@
 import React from 'react';
 import Navbar from './components/navbar';
-import { ChakraProvider } from '@chakra-ui/react'
+
+import styled from "styled-components"
+
+export const Container = styled.div`
+  margin: 32px 99px;
+`
 
 const  App: React.FC = () => {
   return (
-    <ChakraProvider>       
-       <Navbar/>
-    </ChakraProvider>
+       <Container>
+          <Navbar/>
+       </Container>
   );
 }
 
