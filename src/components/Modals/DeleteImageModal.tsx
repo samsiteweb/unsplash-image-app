@@ -9,7 +9,7 @@ export const DeleteImageModal: React.FC<any> = ({isOpen, handleCloseModal}) => {
     return (
         <Modal isOpen={isOpen} onClose={handleCloseModal}>
             <ModalTitle> Are you sure? </ModalTitle>
-            <CustomInput width="552.33px" label='Photo Url' placeholder='Suspendisse elit massa' />
+            <CustomInput width="552.33px" label='Password' placeholder='*******************' />
                 <ButtonWrapper>
                     <CancelButton onClick={handleCloseModal}>Cancel</CancelButton>
                     <DeleteImageButton>Delete</DeleteImageButton>

@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import styled from "styled-components";
 import {DangerOutlineButton} from '../helper/button'
+import { DeleteImageModal } from "../Modals/DeleteImageModal";
 
 const ImageContainer = styled.div`
   margin: 10px;
@@ -80,6 +81,17 @@ interface ImageMasonryProps {
 }
 
 const ImageMasonry: React.FC<ImageMasonryProps> = ({ images, onImageDelete }) => {
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleOpenModal = () => {
+      setIsOpen(true);
+    };
+  
+    const handleCloseModal = () => {
+      setIsOpen(false);
+    };
+
   const handleImageDelete = (index: number) => {
     if (onImageDelete) {
       onImageDelete(index);
@@ -94,13 +106,14 @@ const ImageMasonry: React.FC<ImageMasonryProps> = ({ images, onImageDelete }) =>
             <Image src={image.src} alt={image.label} />
             <ImageOverlay>
               <ImageLabel>{image.label}</ImageLabel>
-              <DeleteButton onClick={() => handleImageDelete(index)}>
+              <DeleteButton  onClick={handleOpenModal}>
                 delete
               </DeleteButton>
             </ImageOverlay>
           </ImageContainer>
         ))}
       </Masonry>
+      <DeleteImageModal isOpen={isOpen} handleCloseModal={handleCloseModal} />
     </ResponsiveMasonry>
   );
 };
