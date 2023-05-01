@@ -15,6 +15,30 @@ const ImageContainer = styled.div`
   }
 `;
 
+
+const Image = styled.img`
+  width: 100%;
+  height: auto;
+`;
+
+
+const ImageLabel = styled.div`
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFFFFF;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+`;
+
+const DeleteButton = styled(Button)`
+ 
+  top: 50px;
+`;
+
 const ImageOverlay = styled.div`
   position: absolute;
   top: 0;
@@ -34,21 +58,21 @@ const ImageOverlay = styled.div`
   ${ImageContainer}:hover & {
     opacity: 1;
   }
+  
+  &:hover {
+    opacity: 1;
+  }
+
+  & > ${DeleteButton} {
+   
+  }
+  
+  & > ${ImageLabel} {
+    align-self: flex-start;
+    margin-bottom: 30px;
+  }
 `;
 
-const ImageLabel = styled.div`
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  color: #FFFFFF;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: auto;
-`;
 
 interface ImageMasonryProps {
   images: { src: string; label: string }[];
@@ -70,9 +94,9 @@ const ImageMasonry: React.FC<ImageMasonryProps> = ({ images, onImageDelete }) =>
             <Image src={image.src} alt={image.label} />
             <ImageOverlay>
               <ImageLabel>{image.label}</ImageLabel>
-              <Button danger onClick={() => handleImageDelete(index)}>
-                Delete
-              </Button>
+              <DeleteButton dangerOutline onClick={() => handleImageDelete(index)}>
+                delete
+              </DeleteButton>
             </ImageOverlay>
           </ImageContainer>
         ))}

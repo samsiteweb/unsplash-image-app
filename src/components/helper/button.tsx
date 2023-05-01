@@ -1,15 +1,12 @@
 import React from 'react'
 import styled, { css } from "styled-components"
-//import { Button as button } from '@chakra-ui/react';
 
 interface ButtonProps {
-  primary?: boolean;
-  secondary?: boolean;
-  tertiary?: boolean;
-  danger?: boolean;
-  disabled?: boolean;
-  children?: React.ReactNode;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    primary?: boolean;
+    disabled?: boolean;
+    dangerOutline?: boolean;
+    children?: React.ReactNode;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const ButtonBase = css`
@@ -35,12 +32,12 @@ const PrimaryButton = styled.button<ButtonProps>`
   width: 137px;
   height: 55px;
   ${(props) =>
-    props.disabled
-      ? css`
+        props.disabled
+            ? css`
           opacity: 0.5;
           pointer-events: none;
         `
-      : css`
+            : css`
           &:hover {
             background-color: #2C8E58;
           }
@@ -51,57 +48,60 @@ const PrimaryButton = styled.button<ButtonProps>`
         `}
 `;
 
-const DangerButton = styled.button<ButtonProps>`
+const DangerOutlineButton = styled.button<ButtonProps>`
   ${ButtonBase};
-  color: white;
-  background-color: #EB5757;
-  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  width: 137px;
-  height: 55px;
+    color: #EB5757;
+    background-color: transparent;
+    width: 63px;
+    height: 23px;
+    border: 1px solid #EB5757;
+    border-radius: 38px;
+
   ${(props) =>
-    props.disabled
-      ? css`
+        props.disabled
+            ? css`
           opacity: 0.5;
           pointer-events: none;
         `
-      : css`
+            : css`
           &:hover {
-            background-color: #c82333;
+            background-color: #EB5757;
+            color: white;
           }
           &:active {
             background-color: #c82333;
+            color: white;
             box-shadow: none;
           }
         `}
 `;
 
 const Button: React.FC<ButtonProps> = ({
-  primary,
-  danger,
-  disabled,
-  children,
-  onClick,
+    primary,
+    dangerOutline,
+    disabled,
+    children,
+    onClick,
 }) => {
-  if (primary) {
+    if (primary) {
+        return (
+            <PrimaryButton onClick={onClick} disabled={disabled}>
+                {children}
+            </PrimaryButton>
+        );
+    }
+    if (dangerOutline) {
+        return (
+            <DangerOutlineButton onClick={onClick} disabled={disabled}>
+                {children}
+            </DangerOutlineButton>
+        );
+    }
     return (
-      <PrimaryButton onClick={onClick} disabled={disabled}>
-        {children}
-      </PrimaryButton>
+        <PrimaryButton onClick={onClick} disabled={disabled}>
+            {children}
+        </PrimaryButton>
     );
-  }
-  if (danger) {
-    return (
-      <DangerButton onClick={onClick} disabled={disabled}>
-        {children}
-      </DangerButton>
-    );
-  }
-  return (
-    <PrimaryButton onClick={onClick} disabled={disabled}>
-      {children}
-    </PrimaryButton>
-  );
 };
 
 export default Button;
