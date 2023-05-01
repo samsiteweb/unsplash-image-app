@@ -20,7 +20,7 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "files": ["globals.d.ts"],
+  "files": ["globals.d.ts", "react-responsive-masonry.d.ts"],
   "include": [
     "src"
   ]
