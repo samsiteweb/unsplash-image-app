@@ -11,5 +11,12 @@ const getImageListId = (state: RootState) => state.imageList.selectedImageId;
 export const getSelectedImage = createSelector(
   getImageList,
   getImageListId,
-  (imageList, selectedImageId) => imageList.find((image: Image) => image.id === selectedImageId)
-);
+  (imageList, selectedImageId) => {  
+
+    if (imageList.length > 0) {
+        return imageList.find((image: Image) => image.id === selectedImageId)
+     }else {
+        return []
+     }
+
+  })

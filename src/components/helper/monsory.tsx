@@ -26,7 +26,6 @@ const Image = styled.img`
 
 
 const ImageLabel = styled.div`
-  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -110,7 +109,7 @@ const ImageMasonry: React.FC<ImageMasonryProps> = ({ images, onImageDelete }) =>
   return (
     <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
       <Masonry gutter="10px">
-        {images.map((image, index) => (
+        {images.length > 0 ? images.map((image, index) => (
           <ImageContainer key={index}>
             <Image src={image?.image_url} alt={image?.label} />
             <ImageOverlay>
@@ -120,7 +119,7 @@ const ImageMasonry: React.FC<ImageMasonryProps> = ({ images, onImageDelete }) =>
               </DeleteButton>
             </ImageOverlay>
           </ImageContainer>
-        ))}
+        )) : null}
       </Masonry>
       <DeleteImageModal isOpen={isOpen} handleCloseModal={handleCloseModal} />
     </ResponsiveMasonry>

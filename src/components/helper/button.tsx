@@ -87,33 +87,3 @@ export const DangerOutlineButton = styled(ButtonBase)`
     box-shadow: none;
   }
 `;
-
-// const Button: React.FC<ButtonProps> = ({
-//     primary,
-//     dangerOutline,
-//     disabled,
-//     children,
-//     onClick,
-// }) => {
-//     if (primary) {
-//         return (
-//             <PrimaryButton onClick={onClick} disabled={disabled}>
-//                 {children}
-//             </PrimaryButton>
-//         );
-//     }
-//     if (dangerOutline) {
-//         return (
-//             <DangerOutlineButton onClick={onClick} disabled={disabled}>
-//                 {children}
-//             </DangerOutlineButton>
-//         );
-//     }
-//     return (
-//         <PrimaryButton onClick={onClick} disabled={disabled}>
-//             {children}
-//         </PrimaryButton>
-//     );
-// };
-
-// export default Button;

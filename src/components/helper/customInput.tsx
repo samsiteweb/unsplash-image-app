@@ -13,7 +13,6 @@ interface InputProps {
 
 const InputLabelContainer = styled.div`
   display: flex;
-  font-family: 'Open Sans', sans-serif; 
   flex-direction: column;
   margin: 20px 0 20px 0
 `;
@@ -43,6 +42,7 @@ const InputIcon = styled.span`
   word-wrap: normal;
   direction: ltr;
   margin-right: 10px;
+  color: #BDBDBD;
 `;
 
 const TextInput = styled.input`
@@ -53,6 +53,13 @@ const TextInput = styled.input`
   padding: 0;
   margin: 0;
   flex: 1;
+  ::placeholder {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    color: #BDBDBD;
+  }
 `;
 
 const InputLabelElement = styled.label`

@@ -6,7 +6,7 @@ import Modal from '../helper/modal';
 import { BorderLessButton as CancelButton, PrimaryButton as AddImageButton } from '../helper/button';
 import { ButtonWrapper, ModalTitle } from './styles';
 import { useAppDispatch } from '../../store/store';
-import { addImage, addImageToList } from '../../store/features/imageSlice';
+import { addImage } from '../../store/features/imageSlice';
 import { useImageListLoadingStatus } from '../../store/selectors/imageSlice';
 
 export const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {

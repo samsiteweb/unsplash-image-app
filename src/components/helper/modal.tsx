@@ -22,7 +22,6 @@ const ModalOverlay = styled.div<{ isOpen: boolean }>`
 
 const ModalContainer = styled.div`
   position: fixed;
-  font-family: 'Open Sans', sans-serif; 
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);

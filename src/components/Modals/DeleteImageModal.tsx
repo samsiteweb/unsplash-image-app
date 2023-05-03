@@ -14,11 +14,11 @@ export const DeleteImageModal: React.FC<any> = ({isOpen, handleCloseModal}) => {
     const passwordRef = useRef<HTMLInputElement>(null);
     const dispatch = useAppDispatch();
 
-    const selectedImage = useSelector(getSelectedImage);
+    const selectedImage: any = useSelector(getSelectedImage);
     console.log(selectedImage, "logging here")
 
     const handleDeleteImage = () => {
-        const id = selectedImage?.id ?? "";
+        const id = selectedImage ? selectedImage?.id : "";
         const password = passwordRef.current?.value ?? "";
         dispatch(deleteImage({ id, password }));
       };
