@@ -7,7 +7,8 @@ export const LogoAndSearchBarContainer = styled.div`
     align-items: center;
 `
 export const SearchBarWrapper = styled.div`
-width: 100%;
+    width: 100%;
+    margin-right: 10px;
    @media only screen and (max-width: 768px) {
     width: 100%;
     height: auto;
