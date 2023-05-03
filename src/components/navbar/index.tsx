@@ -12,7 +12,7 @@ import CustomInput from '../reusable/CustomInput';
 import debounce from '../../utility/helperFunctions';
 import { useAppDispatch } from '../../store/common/store';
 import { searchImageList } from '../../store/thunks';
-import { AddImageModal } from '../modals/AddImageModal';
+import { AddImageModal } from '../Modals/AddImageModal';
 
 
 
