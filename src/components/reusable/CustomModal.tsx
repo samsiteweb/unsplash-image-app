@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import styled from 'styled-components';
 
 type ModalProps = {
@@ -34,7 +34,7 @@ const ModalContainer = styled.div`
 `;
 
 
-const Modal: FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
+const CustomModal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
     if (event.keyCode === 27 && isOpen) {
@@ -61,4 +61,4 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
   );
 };
 
-export default Modal;
+export default CustomModal;

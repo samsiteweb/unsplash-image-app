@@ -1,15 +1,14 @@
 
-import CustomInput  from '../helper/customInput';
-import Modal from '../helper/modal';
 import { useRef } from 'react';
-import { BorderLessButton as CancelButton, PrimaryButton } from '../helper/button';
+import { BorderLessButton as CancelButton } from '../reusable/Button';
 import { ButtonWrapper, DeleteImageButton, ModalTitle } from './styles';
 import { deleteImage } from '../../store/features/imageSlice';
 import { useAppDispatch } from '../../store/store';
 import { useSelector } from 'react-redux';
 import { getSelectedImage } from '../../store/selectors/imageSlice';
+import {CustomInput, CustomModal as Modal } from '../reusable';
 
-export const DeleteImageModal: React.FC<any> = ({isOpen, handleCloseModal}) => {
+const DeleteImageModal: React.FC<any> = ({isOpen, handleCloseModal}) => {
 
     const passwordRef = useRef<HTMLInputElement>(null);
     const dispatch = useAppDispatch();
@@ -35,3 +34,5 @@ export const DeleteImageModal: React.FC<any> = ({isOpen, handleCloseModal}) => {
         </Modal>
     )
 }
+
+export default DeleteImageModal;

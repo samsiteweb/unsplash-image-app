@@ -1,11 +1,10 @@
 import React, {useState} from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { Image as StoredImage, selectImage } from "../../store/features/imageSlice";
-import { getSelectedImage } from "../../store/selectors/imageSlice";
-import {DangerOutlineButton} from '../helper/button'
-import { DeleteImageModal } from "../Modals/DeleteImageModal";
+import {DangerOutlineButton} from './Button'
+import { DeleteImageModal } from "../Modals";
 
 const ImageContainer = styled.div`
   margin: 10px;
@@ -18,12 +17,10 @@ const ImageContainer = styled.div`
   }
 `;
 
-
 const Image = styled.img`
   width: 100%;
   height: auto;
 `;
-
 
 const ImageLabel = styled.div`
   font-style: normal;
@@ -87,8 +84,6 @@ const ImageMasonry: React.FC<ImageMasonryProps> = ({ images, onImageDelete }) =>
     const [isOpen, setIsOpen] = useState(false);
 
     const dispatch = useDispatch();
-    const selectedImage = useSelector(getSelectedImage);
-
 
     const handleOpenModal = (events:any, image: any) => {
         console.log(image)

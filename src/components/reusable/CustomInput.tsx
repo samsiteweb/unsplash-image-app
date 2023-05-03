@@ -14,7 +14,6 @@ interface InputProps {
 const InputLabelContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 20px 0 20px 0
 `;
 
 const InputContainer = styled.div<InputProps>`

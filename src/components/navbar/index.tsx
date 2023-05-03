@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { PrimaryButton as AddImageButton } from '../helper/button';
+import { PrimaryButton as AddImageButton } from '../reusable/Button';
 import myUnsplashLogo from '../../assets/my_unsplash_logo.svg';
 
 import {
@@ -7,8 +7,8 @@ import {
     Logo,
     LogoAndSearchBarContainer
 } from "./styles"
-import { AddImageModal } from '../Modals/addImageModal';
-import CustomInput from '../helper/customInput';
+import { AddImageModal } from '../Modals';
+import CustomInput from '../reusable/CustomInput';
 import debounce from '../../utility/helperFunctions';
 import { useAppDispatch } from '../../store/store';
 import { searchImageList } from '../../store/features/imageSlice';

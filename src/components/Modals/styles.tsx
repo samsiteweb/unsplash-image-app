@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { PrimaryButton } from '../helper/button';
+import { PrimaryButton } from '../reusable/Button';
 
 export const ModalTitle = styled.div`
 font-weight: 500;

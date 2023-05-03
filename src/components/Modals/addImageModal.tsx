@@ -1,20 +1,13 @@
 
 import { useRef } from 'react';
-
-import CustomInput  from '../helper/customInput';
-import Modal from '../helper/modal';
-import { BorderLessButton as CancelButton, PrimaryButton as AddImageButton } from '../helper/button';
+import { CustomModal as Modal, CustomInput } from '../reusable';
+import { BorderLessButton as CancelButton, PrimaryButton as AddImageButton } from '../reusable/Button';
 import { ButtonWrapper, ModalTitle } from './styles';
 import { useAppDispatch } from '../../store/store';
 import { addImage } from '../../store/features/imageSlice';
 import { useImageListLoadingStatus } from '../../store/selectors/imageSlice';
 
-export const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
-  const imageData = {
-    id: '1',
-    created_at: '2015-10-10',
-    updated_at: '2015-10-10',
-  };
+const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
 
   const labelRef = useRef<HTMLInputElement>(null);
   const urlRef = useRef<HTMLInputElement>(null);
@@ -42,3 +35,5 @@ export const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
     </Modal>
   );
 };
+
+export default AddImageModal;
