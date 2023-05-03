@@ -8,7 +8,7 @@ import { getSelectedImage } from '../../store/selectors';
 import {CustomInput, CustomModal as Modal } from '../reusable';
 import { deleteImage } from '../../store/thunks';
 
-const DeleteImageModal: React.FC<any> = ({isOpen, handleCloseModal}) => {
+export const DeleteImageModal: React.FC<any> = ({isOpen, handleCloseModal}) => {
 
     const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -61,5 +61,3 @@ const DeleteImageModal: React.FC<any> = ({isOpen, handleCloseModal}) => {
         </Modal>
     )
 }
-
-export default DeleteImageModal;

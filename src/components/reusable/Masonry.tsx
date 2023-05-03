@@ -5,7 +5,7 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { selectImage } from "../../store/features";
 import { Image as StoredImage } from "../../store/common/store.interface"
 import {DangerOutlineButton} from './Button'
-import { DeleteImageModal } from "../modals";
+import { DeleteImageModal } from "../modals/DeleteImageModal";
 
 const ImageContainer = styled.div`
   margin: 10px;

@@ -6,7 +6,7 @@ import { ButtonWrapper, ModalMessage, ModalTitle } from './styles';
 import { useAppDispatch, useAppSelector } from '../../store/common/store';
 import { addImage } from '../../store/thunks';
 
-const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
+export const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
 
   const labelRef = useRef<HTMLInputElement>(null);
   const urlRef = useRef<HTMLInputElement>(null);
@@ -55,5 +55,3 @@ const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
     </Modal>
   );
 };
-
-export default AddImageModal;
