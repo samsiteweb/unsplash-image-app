@@ -25,7 +25,6 @@ export const ButtonLoader = styled.div`
   z-index: 10;
 `;
 
-
 const buttonBaseStyles = css`
   color: white;
   background: #3DB46D;
@@ -33,6 +32,13 @@ const buttonBaseStyles = css`
   border-radius: 12px;
   width: 137px;
   height: 55px;
+  border: 0;
+  @media only screen and (max-width: 768px) {
+    font-size: 10px;
+    height: 40px;
+    width: 100px;
+    margin-left: 10px;
+   }
   ${(props: ButtonProps) =>
     props.disabled
       ? css`
@@ -48,14 +54,7 @@ const buttonBaseStyles = css`
             box-shadow: none;
           }
         `}
-
-  ${(props: ButtonProps) =>
-    props.isLoading && `${ButtonLoader}`}
 `;
-
-// @media (max-width: 768px) {
-//     height: 44px;
-//   }
 
 const ButtonBase = styled.button<ButtonProps>`
   ${buttonBaseStyles}
@@ -83,6 +82,36 @@ export const DangerOutlineButton = styled(ButtonBase)`
   }
   &:active {
     background-color: #c82333;
+    color: white;
+    box-shadow: none;
+  }
+`;
+
+export const PlainButton = styled(ButtonBase)`
+  color: #BDBDBD;
+  background-color: transparent;
+  border: 0px;
+  box-shadow: none;
+  width: 80px;
+  &:hover {
+    background-color: #E6E6E6;
+    color: white;
+  }
+  &:active {
+    background-color: #E6E6E6;
+    color: white;
+    box-shadow: none;
+  }
+`;
+
+export const DangerButton = styled(PrimaryButton)`
+  background: #EB5757;
+  &:hover {
+    background-color: #A42828;
+    color: white;
+  }
+  &:active {
+    background-color: #A42828;
     color: white;
     box-shadow: none;
   }

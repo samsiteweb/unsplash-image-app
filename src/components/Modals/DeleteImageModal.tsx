@@ -1,7 +1,7 @@
 
-import { useRef } from 'react';
-import { BorderLessButton as CancelButton } from '../reusable/Button';
-import { ButtonWrapper, DeleteImageButton, ModalTitle } from './styles';
+import { useRef, useState  } from 'react';
+import { DangerButton, PlainButton } from '../reusable/Button';
+import { ButtonWrapper, ModalMessage, ModalTitle } from './styles';
 import { deleteImage } from '../../store/features/imageSlice';
 import { useAppDispatch } from '../../store/store';
 import { useSelector } from 'react-redux';
@@ -11,25 +11,50 @@ import {CustomInput, CustomModal as Modal } from '../reusable';
 const DeleteImageModal: React.FC<any> = ({isOpen, handleCloseModal}) => {
 
     const passwordRef = useRef<HTMLInputElement>(null);
+
+    const [isError, setIsError] = useState(false);
+    const [message, setMessage] = useState('');
+
     const dispatch = useAppDispatch();
 
     const selectedImage: any = useSelector(getSelectedImage);
-    console.log(selectedImage, "logging here")
 
     const handleDeleteImage = () => {
-        const id = selectedImage ? selectedImage?.id : "";
-        const password = passwordRef.current?.value ?? "";
-        dispatch(deleteImage({ id, password }));
+        const password = passwordRef.current?.value?.trim();
+
+        if (!password) {
+            setIsError(true);
+            setMessage('Please enter a password.');
+            return;
+          }
+
+          if (password.length < 6) {
+            setIsError(true);
+            setMessage('Please is at least six(6) characters long.');
+            return;
+          }
+
+        const deleteImageData = {
+            id: selectedImage ? selectedImage?.id : "",
+            password: passwordRef.current?.value ?? ""
+        }
+        dispatch(deleteImage(deleteImageData));
       };
     
 
+      const handleClose = () => { 
+        setIsError(false);
+        setMessage('');  
+        }
+
     return (
-        <Modal isOpen={isOpen} onClose={handleCloseModal}>
+        <Modal height="276.12px" isOpen={isOpen} onClose={handleCloseModal}>
             <ModalTitle> Are you sure? </ModalTitle>
-            <CustomInput width="552.33px" ref={passwordRef} label='password' placeholder='*******************' />
+            <ModalMessage isError={isError}>{message}</ModalMessage>
+            <CustomInput width="552.33px" ref={passwordRef} label='Password' placeholder='*******************' />
                 <ButtonWrapper>
-                    <CancelButton onClick={handleCloseModal}>Cancel</CancelButton>
-                    <DeleteImageButton onClick={handleDeleteImage} >Delete</DeleteImageButton>
+                    <PlainButton onClick={() => {handleCloseModal(); handleClose()}}>Cancel</PlainButton>
+                    <DangerButton onClick={handleDeleteImage} >Delete</DangerButton>
                 </ButtonWrapper>
         </Modal>
     )

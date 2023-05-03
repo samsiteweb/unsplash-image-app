@@ -87,19 +87,10 @@ export const ImageListSlice = createSlice({
             state.images = action.payload.data
             state.isLoading = false;
         });
-        builder.addCase(fetchImageList.rejected, (state, action) => {
-            state.msg = "error fetching image list"
-            state.isLoading = false;
-        });
         builder.addCase(addImage.fulfilled, (state, action) => {
-            state.images = [...state.images, action.payload.data]
+            state.images = [action.payload.data, ...state.images]
             state.isLoading = false;
         });
-        builder.addCase(addImage.rejected, (state, action) => {
-            state.msg = "error adding to image list"
-            state.isLoading = false;
-        });
-
         builder.addCase(deleteImage.fulfilled, (state,   action) => {
             state.isLoading = false
         });

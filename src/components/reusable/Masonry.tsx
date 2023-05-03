@@ -34,8 +34,12 @@ const ImageLabel = styled.div`
 `;
 
 const DeleteButton = styled(DangerOutlineButton)`
-top: 10px;
-right: 10px;
+  top: 10px;
+  right: 10px;
+  width: 63px;
+  height: 23px;
+  border: 1px solid #EB5757;
+  border-radius: 38px;
 `;
 
 const ImageOverlay = styled.div`
@@ -70,9 +74,9 @@ const ImageOverlay = styled.div`
   & > ${ImageLabel} {
     align-self: flex-start;
     margin-bottom: 30px;
+    margin-left: 24px;
   }
 `;
-
 
 interface ImageMasonryProps {
   images: Partial<StoredImage[]>;
@@ -86,7 +90,6 @@ const ImageMasonry: React.FC<ImageMasonryProps> = ({ images, onImageDelete }) =>
     const dispatch = useDispatch();
 
     const handleOpenModal = (events:any, image: any) => {
-        console.log(image)
         dispatch(selectImage(image))
       setIsOpen(true);
     };
@@ -94,12 +97,6 @@ const ImageMasonry: React.FC<ImageMasonryProps> = ({ images, onImageDelete }) =>
     const handleCloseModal = () => {
       setIsOpen(false);
     };
-
-  const handleImageDelete = (index: number) => {
-    if (onImageDelete) {
-      onImageDelete(index);
-    }
-  };
 
   return (
     <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>

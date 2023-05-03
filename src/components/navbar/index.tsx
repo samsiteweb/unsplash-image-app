@@ -5,7 +5,8 @@ import myUnsplashLogo from '../../assets/my_unsplash_logo.svg';
 import {
     Container,
     Logo,
-    LogoAndSearchBarContainer
+    LogoAndSearchBarContainer,
+    SearchBarWrapper
 } from "./styles"
 import { AddImageModal } from '../Modals';
 import CustomInput from '../reusable/CustomInput';
@@ -36,7 +37,9 @@ return(
       <Container>
         <LogoAndSearchBarContainer>
             <Logo src={myUnsplashLogo} alt="" />
-            <CustomInput icon='search' onChange={(event) => handleChange(event.target.value)} placeholder='Search by name' />
+          <SearchBarWrapper>
+            <CustomInput width='300px' icon='search' onChange={(event) => handleChange(event.target.value)} placeholder='Search by name' />
+         </SearchBarWrapper>
         </LogoAndSearchBarContainer>
         <AddImageButton onClick={handleOpenModal}>Add a photo</AddImageButton>
       </Container>

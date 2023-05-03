@@ -1,8 +1,8 @@
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { CustomModal as Modal, CustomInput } from '../reusable';
-import { BorderLessButton as CancelButton, PrimaryButton as AddImageButton } from '../reusable/Button';
-import { ButtonWrapper, ModalTitle } from './styles';
+import { PlainButton, PrimaryButton as AddImageButton } from '../reusable/Button';
+import { ButtonWrapper, ModalMessage, ModalTitle } from './styles';
 import { useAppDispatch } from '../../store/store';
 import { addImage } from '../../store/features/imageSlice';
 import { useImageListLoadingStatus } from '../../store/selectors/imageSlice';
@@ -11,11 +11,31 @@ const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
 
   const labelRef = useRef<HTMLInputElement>(null);
   const urlRef = useRef<HTMLInputElement>(null);
+
+  const [isError, setIsError] = useState(false);
+  const [message, setMessage] = useState('');
+
   const dispatch = useAppDispatch();
 
   const isLoading = useImageListLoadingStatus();
 
   const handleAddImage = () => {
+    const label = labelRef.current?.value?.trim();
+    const url = urlRef.current?.value?.trim();
+
+    if (!label || !url) {
+      setIsError(true);
+      setMessage('Please enter a label and photo url.');
+      return;
+    }
+    
+    // Check if url is a valid image url
+    if (!/\.(jpeg|jpg|gif|png)$/i.test(url)) {
+      setIsError(true);
+      setMessage('Please enter a valid image url.');
+      return;
+    }
+
     const newImageData = {
       label: labelRef.current?.value ?? '',
       image_url: urlRef.current?.value ?? '',
@@ -23,13 +43,21 @@ const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
     dispatch(addImage(newImageData));
   };
 
+ const handleClose = () => { 
+        setIsError(false);
+        setMessage('');  
+  }
+
+
+
   return (
-    <Modal isOpen={isOpen} onClose={handleCloseModal}>
+    <Modal height='367.2px' isOpen={isOpen} onClose={handleCloseModal}>
       <ModalTitle> Add a new photo </ModalTitle>
+      <ModalMessage isError={isError}>{message}</ModalMessage>
       <CustomInput ref={labelRef} width="100%" label="Label" placeholder="Suspendisse elit massa" />
       <CustomInput ref={urlRef} width="100%" label="Photo Url" placeholder="Suspendisse elit massa" />
       <ButtonWrapper>
-        <CancelButton onClick={handleCloseModal}>Cancel</CancelButton>
+        <PlainButton onClick={() => {handleCloseModal(); handleClose()}}>Cancel</PlainButton>
         <AddImageButton isLoading={isLoading} disabled={isLoading} onClick={handleAddImage}>Add image</AddImageButton>
       </ButtonWrapper>
     </Modal>

@@ -6,14 +6,27 @@ export const LogoAndSearchBarContainer = styled.div`
     justify-content: center;
     align-items: center;
 `
+export const SearchBarWrapper = styled.div`
+width: 100%;
+   @media only screen and (max-width: 768px) {
+    width: 100%;
+    height: auto;
+  }
+`
+
 export const Logo = styled.img`
     margin-right: 30px;
+    @media only screen and (max-width: 768px) {
+     margin-right: 0px;
+     width: 100px;
+    }
 `
 
 export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 20px;
+    width: 100%;
     `
 
 export const btn = styled.button`

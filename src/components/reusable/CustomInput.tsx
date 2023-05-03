@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 interface InputProps {
   placeholder?: string;
+  message?: string;
+  isError?: boolean;
   icon?: string;
   label?: string;
   width?: string;
@@ -10,23 +12,25 @@ interface InputProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-
 const InputLabelContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
 const InputContainer = styled.div<InputProps>`
   display: flex;
   align-items: center;
   padding: 10px;
   background-color: #ffffff;
   box-sizing: border-box;
-  width: ${(props) => props.width ? props.width : '300px'};
+  width: ${(props) => (props.width ? props.width : '100%')};
   height: 55px;
   border: 1px solid #bdbdbd;
   border-radius: 12px;
   filter: drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.1));
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const InputIcon = styled.span`
@@ -42,6 +46,9 @@ const InputIcon = styled.span`
   direction: ltr;
   margin-right: 10px;
   color: #BDBDBD;
+  @media only screen and (max-width: 768px) {
+    font-size: 20px;
+    margin-right: 5px;
 `;
 
 const TextInput = styled.input`
@@ -52,6 +59,7 @@ const TextInput = styled.input`
   padding: 0;
   margin: 0;
   flex: 1;
+  
   ::placeholder {
     font-style: normal;
     font-weight: 500;
@@ -59,21 +67,31 @@ const TextInput = styled.input`
     line-height: 19px;
     color: #BDBDBD;
   }
+  
+  @media only screen and (max-width: 768px) {
+   width: 100%;
+   ::placeholder {
+    font-size: 12px;
+  }
+  }
 `;
 
 const InputLabelElement = styled.label`
-    margin-right: 8px;
-    font-family: 'Open Sans', sans-serif; 
+    margin-right: 8px; 
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 19px;
     color: #4F4F4F;
     padding-bottom: 10px;
+    @media only screen and (max-width: 768px) {
+    font-size: 12px;
+    padding-bottom: 5px;
+  }
 `;
 
 const CustomInput = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-const { label, width, icon, onChange, inputRef, ...inputProps } = props;
+const { label, width, icon, message, isError, onChange, inputRef, ...inputProps } = props;
   return (
     <InputLabelContainer>
          {label && <InputLabelElement>{label}</InputLabelElement>}

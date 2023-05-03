@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 type ModalProps = {
   isOpen: boolean;
+  height: string;
   onClose: () => void;
   children: ReactNode;
   title?: string;
@@ -20,8 +21,11 @@ const ModalOverlay = styled.div<{ isOpen: boolean }>`
   overflow: hidden;
 `;
 
-const ModalContainer = styled.div`
+const ModalContainer = styled.div<{height: string}>`
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -31,10 +35,15 @@ const ModalContainer = styled.div`
   z-index: 1000;
   border-radius: 12px;
   width: 620px;
+  height: ${(props) => (props.height ? props.height : '367.2px')};
+  @media only screen and (max-width: 768px) {
+    width: 78%;
+    height: 300px;
+  }
 `;
 
 
-const CustomModal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
+const CustomModal: React.FC<ModalProps> = ({ isOpen, onClose, height, children }) => {
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
     if (event.keyCode === 27 && isOpen) {
@@ -54,7 +63,7 @@ const CustomModal: React.FC<ModalProps> = ({ isOpen, onClose, title, children })
 
   return (
     <ModalOverlay isOpen={isOpen}>
-      <ModalContainer>
+      <ModalContainer height={height}>
         {children}
       </ModalContainer>
     </ModalOverlay>
