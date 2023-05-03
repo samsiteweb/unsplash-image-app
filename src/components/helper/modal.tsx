@@ -31,6 +31,7 @@ const ModalContainer = styled.div`
   border-radius: 5px;
   z-index: 1000;
   border-radius: 12px;
+  width: 620px;
 `;
 
 

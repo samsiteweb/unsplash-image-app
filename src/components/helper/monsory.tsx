@@ -1,6 +1,9 @@
 import React, {useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import styled from "styled-components";
+import { Image as StoredImage, selectImage } from "../../store/features/imageSlice";
+import { getSelectedImage } from "../../store/selectors/imageSlice";
 import {DangerOutlineButton} from '../helper/button'
 import { DeleteImageModal } from "../Modals/DeleteImageModal";
 
@@ -76,7 +79,7 @@ const ImageOverlay = styled.div`
 
 
 interface ImageMasonryProps {
-  images: { src: string; label: string }[];
+  images: Partial<StoredImage[]>;
   onImageDelete?: (index: number) => void;
 }
 
@@ -84,7 +87,13 @@ const ImageMasonry: React.FC<ImageMasonryProps> = ({ images, onImageDelete }) =>
 
     const [isOpen, setIsOpen] = useState(false);
 
-    const handleOpenModal = () => {
+    const dispatch = useDispatch();
+    const selectedImage = useSelector(getSelectedImage);
+
+
+    const handleOpenModal = (events:any, image: any) => {
+        console.log(image)
+        dispatch(selectImage(image))
       setIsOpen(true);
     };
   
@@ -103,10 +112,10 @@ const ImageMasonry: React.FC<ImageMasonryProps> = ({ images, onImageDelete }) =>
       <Masonry gutter="10px">
         {images.map((image, index) => (
           <ImageContainer key={index}>
-            <Image src={image.src} alt={image.label} />
+            <Image src={image?.image_url} alt={image?.label} />
             <ImageOverlay>
-              <ImageLabel>{image.label}</ImageLabel>
-              <DeleteButton  onClick={handleOpenModal}>
+              <ImageLabel>{image?.label}</ImageLabel>
+              <DeleteButton  onClick={(events) => handleOpenModal(events, image)}>
                 delete
               </DeleteButton>
             </ImageOverlay>

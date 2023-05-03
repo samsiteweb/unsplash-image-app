@@ -6,6 +6,7 @@ interface InputProps {
   icon?: string;
   label?: string;
   width?: string;
+  inputRef?: React.RefObject<HTMLInputElement>;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -65,16 +66,17 @@ const InputLabelElement = styled.label`
     padding-bottom: 10px;
 `;
 
-const CustomInput: React.FC<InputProps> = ({ placeholder, icon, width, label, onChange }) => {
+const CustomInput = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+const { label, width, icon, onChange, inputRef, ...inputProps } = props;
   return (
     <InputLabelContainer>
          {label && <InputLabelElement>{label}</InputLabelElement>}
     <InputContainer width={width}>
         {icon && <InputIcon className="material-icons">{icon}</InputIcon>}
-      <TextInput type="text" placeholder={placeholder} onChange={onChange} />
+      <TextInput {...inputProps} ref={inputRef ?? ref} onChange={onChange} />
     </InputContainer>
     </InputLabelContainer>
   );
-};
+});
 
 export default CustomInput;
