@@ -1,12 +1,12 @@
 
 import { useRef, useState  } from 'react';
-import { DangerButton, PlainButton } from '../reusable/Button';
+import { DangerButton, PlainButton, Spinner } from '../reusable/Button';
 import { ButtonWrapper, ModalMessage, ModalTitle } from './styles';
-import { deleteImage } from '../../store/features/imageSlice';
-import { useAppDispatch } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/common/store';
 import { useSelector } from 'react-redux';
-import { getSelectedImage } from '../../store/selectors/imageSlice';
+import { getSelectedImage } from '../../store/selectors';
 import {CustomInput, CustomModal as Modal } from '../reusable';
+import { deleteImage } from '../../store/thunks';
 
 const DeleteImageModal: React.FC<any> = ({isOpen, handleCloseModal}) => {
 
@@ -16,6 +16,8 @@ const DeleteImageModal: React.FC<any> = ({isOpen, handleCloseModal}) => {
     const [message, setMessage] = useState('');
 
     const dispatch = useAppDispatch();
+
+    const isLoading = useAppSelector(state => state.imageList.isLoading)
 
     const selectedImage: any = useSelector(getSelectedImage);
 
@@ -51,10 +53,10 @@ const DeleteImageModal: React.FC<any> = ({isOpen, handleCloseModal}) => {
         <Modal height="276.12px" isOpen={isOpen} onClose={handleCloseModal}>
             <ModalTitle> Are you sure? </ModalTitle>
             <ModalMessage isError={isError}>{message}</ModalMessage>
-            <CustomInput width="552.33px" ref={passwordRef} label='Password' placeholder='*******************' />
+            <CustomInput type="password" width="552.33px" ref={passwordRef} label='Password' placeholder='*******************' />
                 <ButtonWrapper>
                     <PlainButton onClick={() => {handleCloseModal(); handleClose()}}>Cancel</PlainButton>
-                    <DangerButton onClick={handleDeleteImage} >Delete</DangerButton>
+                    <DangerButton onClick={handleDeleteImage}>{ isLoading ? <Spinner/>  : "delete" }</DangerButton>
                 </ButtonWrapper>
         </Modal>
     )

@@ -1,11 +1,10 @@
 
 import { useRef, useState } from 'react';
 import { CustomModal as Modal, CustomInput } from '../reusable';
-import { PlainButton, PrimaryButton as AddImageButton } from '../reusable/Button';
+import { PlainButton, PrimaryButton as AddImageButton, Spinner } from '../reusable/Button';
 import { ButtonWrapper, ModalMessage, ModalTitle } from './styles';
-import { useAppDispatch } from '../../store/store';
-import { addImage } from '../../store/features/imageSlice';
-import { useImageListLoadingStatus } from '../../store/selectors/imageSlice';
+import { useAppDispatch, useAppSelector } from '../../store/common/store';
+import { addImage } from '../../store/thunks';
 
 const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
 
@@ -17,7 +16,7 @@ const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
 
   const dispatch = useAppDispatch();
 
-  const isLoading = useImageListLoadingStatus();
+  const isLoading = useAppSelector(state => state.imageList.isLoading)
 
   const handleAddImage = () => {
     const label = labelRef.current?.value?.trim();
@@ -26,13 +25,6 @@ const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
     if (!label || !url) {
       setIsError(true);
       setMessage('Please enter a label and photo url.');
-      return;
-    }
-    
-    // Check if url is a valid image url
-    if (!/\.(jpeg|jpg|gif|png)$/i.test(url)) {
-      setIsError(true);
-      setMessage('Please enter a valid image url.');
       return;
     }
 
@@ -58,7 +50,7 @@ const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
       <CustomInput ref={urlRef} width="100%" label="Photo Url" placeholder="Suspendisse elit massa" />
       <ButtonWrapper>
         <PlainButton onClick={() => {handleCloseModal(); handleClose()}}>Cancel</PlainButton>
-        <AddImageButton isLoading={isLoading} disabled={isLoading} onClick={handleAddImage}>Add image</AddImageButton>
+        <AddImageButton  disabled={isLoading} onClick={handleAddImage}> { isLoading ? <Spinner/>  : "Add image" } </AddImageButton>
       </ButtonWrapper>
     </Modal>
   );

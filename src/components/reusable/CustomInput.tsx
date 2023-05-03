@@ -5,6 +5,7 @@ interface InputProps {
   placeholder?: string;
   message?: string;
   isError?: boolean;
+  type?: string;
   icon?: string;
   label?: string;
   width?: string;
@@ -91,13 +92,13 @@ const InputLabelElement = styled.label`
 `;
 
 const CustomInput = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-const { label, width, icon, message, isError, onChange, inputRef, ...inputProps } = props;
+const { label, width, icon, message, isError, type, onChange, inputRef, ...inputProps } = props;
   return (
     <InputLabelContainer>
          {label && <InputLabelElement>{label}</InputLabelElement>}
     <InputContainer width={width}>
         {icon && <InputIcon className="material-icons">{icon}</InputIcon>}
-      <TextInput {...inputProps} ref={inputRef ?? ref} onChange={onChange} />
+      <TextInput {...inputProps} ref={inputRef ?? ref} type={type ?? "text"} onChange={onChange} />
     </InputContainer>
     </InputLabelContainer>
   );

@@ -2,9 +2,10 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import { Image as StoredImage, selectImage } from "../../store/features/imageSlice";
+import { selectImage } from "../../store/features";
+import { Image as StoredImage } from "../../store/common/store.interface"
 import {DangerOutlineButton} from './Button'
-import { DeleteImageModal } from "../Modals";
+import { DeleteImageModal } from "../modals";
 
 const ImageContainer = styled.div`
   margin: 10px;
@@ -111,7 +112,7 @@ const ImageMasonry: React.FC<ImageMasonryProps> = ({ images, onImageDelete }) =>
               </DeleteButton>
             </ImageOverlay>
           </ImageContainer>
-        )) : null}
+        )) : []}
       </Masonry>
       <DeleteImageModal isOpen={isOpen} handleCloseModal={handleCloseModal} />
     </ResponsiveMasonry>

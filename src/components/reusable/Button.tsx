@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { css } from "styled-components"
+import styled, { css, keyframes } from "styled-components"
 
 interface ButtonProps {
     primary?: boolean;
@@ -11,21 +11,32 @@ interface ButtonProps {
 }
 
 
-export const ButtonLoader = styled.div`
+const spinAnimation = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+export const Spinner = styled.span`
+  align-items: center;
   position: absolute;
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+  width: 20px;
+  height: 20px;
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-top-color: #ffffff;
-  animation: spin 1s ease-in-out infinite;
-  z-index: 10;
+  border-radius: 50%;
+  animation: ${spinAnimation} 0.6s linear infinite;
 `;
 
 const buttonBaseStyles = css`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
   background: #3DB46D;
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);

@@ -4,13 +4,13 @@ declare module 'react-responsive-masonry' {
     export const ResponsiveMasonry: React.ComponentType<{
       columnsCountBreakPoints?: Record<string, number>;
       gutter?: string;
-      children: React.ReactNode;
+      children?: React.ReactNode;
     }>;
   
     export const Masonry: React.ComponentType<{
       gutter?: string;
       columnsCount?: number;
-      children: React.ReactNode;
+      children?: React.ReactNode;
     }>;
   
     export default Masonry;

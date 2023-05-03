@@ -8,11 +8,12 @@ import {
     LogoAndSearchBarContainer,
     SearchBarWrapper
 } from "./styles"
-import { AddImageModal } from '../Modals';
+import { AddImageModal } from '../modals';
 import CustomInput from '../reusable/CustomInput';
 import debounce from '../../utility/helperFunctions';
-import { useAppDispatch } from '../../store/store';
-import { searchImageList } from '../../store/features/imageSlice';
+import { useAppDispatch } from '../../store/common/store';
+import { searchImageList } from '../../store/thunks';
+
 
 
 const Navbar:React.FC = ()=> {
