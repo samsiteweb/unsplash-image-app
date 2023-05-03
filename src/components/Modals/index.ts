@@ -1,2 +1,2 @@
-export { default as AddImageModal } from './AddImageModal';
-export { default as DeleteImageModal } from './DeleteImageModal';
+export { default as AddImageModal } from './InsertImageModal';
+export { default as DeleteImageModal } from './RemoveImageModal';
