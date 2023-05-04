@@ -32,6 +32,16 @@ export const Spinner = styled.span`
   animation: ${spinAnimation} 0.6s linear infinite;
 `;
 
+export const LoaderSpinner = styled(Spinner)<{color?: string}>`
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-color:  ${({color}) => color ? color : "#3DB46D" };
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: ${spinAnimation} 0.6s linear infinite;
+`;
+
 const buttonBaseStyles = css`
   position: relative;
   display: flex;

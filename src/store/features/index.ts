@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { setTextRange } from "typescript"
 import { Image, ImageListState } from "../common/store.interface"
 import { addImage, deleteImage, fetchImageList, searchImageList } from "../thunks"
 
@@ -28,7 +27,7 @@ export const ImageListSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchImageList.pending, (state,   action) => {
-            state.isLoading = false;
+            state.isLoading = true;
         });
         builder.addCase(fetchImageList.fulfilled, (state,   action) => {
             state.images = action.payload.data
@@ -48,8 +47,12 @@ export const ImageListSlice = createSlice({
             state.images = state.images.filter(image => image.id !== state.selectedImageId)
             state.isLoading = false;
         });
+        builder.addCase(searchImageList.pending, (state,   action) => {
+            state.isLoading = true;
+        });
         builder.addCase(searchImageList.fulfilled, (state,   action) => {
-            state.images = action.payload.data
+            state.images = action.payload.data;
+            state.isLoading = false;
         });
     }
 })

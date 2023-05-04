@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
 import Navbar from './components/navbar';
 import { Masonry as ImageMasonry }from './components/reusable';
+import { LoaderSpinner } from './components/reusable/Button';
 import { useAppDispatch, useAppSelector } from './store/common/store';
 import { fetchImageList } from './store/thunks';
-import { AppContainer } from './styles/global';
+import { AppContainer, BodyLoaderWrapper } from './styles/global';
 
 const  App: React.FC = () => {
   
@@ -13,12 +15,16 @@ const  App: React.FC = () => {
     dispatch(fetchImageList())
   }, [])
 
-  const storeImages = useAppSelector(state => state.imageList.images)
-
+  const state = useAppSelector(state => state.imageList)
+  
   return (
        <AppContainer>
           <Navbar/>
-          <ImageMasonry images={storeImages} />
+          <BodyLoaderWrapper>
+            {state.isLoading && <LoaderSpinner />}
+          </BodyLoaderWrapper>
+          <ImageMasonry images={state.images} />
+          
        </AppContainer>
   );
 }

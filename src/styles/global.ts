@@ -24,3 +24,9 @@ export const AppContainer = styled.div`
     margin: 10px 20px 0 20px;
    }
 `
+
+export const BodyLoaderWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    `
