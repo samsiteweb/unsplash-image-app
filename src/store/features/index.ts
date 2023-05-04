@@ -41,7 +41,9 @@ export const ImageListSlice = createSlice({
             state.isLoading = true;
         });
         builder.addCase(deleteImage.fulfilled, (state,   action) => {
-            state.images = state.images.filter(image => image.id !== state.selectedImageId)
+            if (action.payload.status !== "error") {
+                state.images = state.images.filter(image => image.id !== state.selectedImageId)
+            }
             state.isLoading = false;
         });
         builder.addCase(searchImageList.pending, (state,   action) => {
@@ -49,6 +51,7 @@ export const ImageListSlice = createSlice({
         });
         builder.addCase(searchImageList.fulfilled, (state,   action) => {
             state.images = action.payload.data;
+            state.isLoading = false;
         });
     }
 })

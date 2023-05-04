@@ -53,6 +53,7 @@ export const DeleteImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) =>
   const handleClose = () => {
     setIsError(false);
     setMessage('');
+    handleCloseModal();
   };
 
   return (
