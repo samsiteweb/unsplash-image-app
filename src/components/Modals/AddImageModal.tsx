@@ -1,5 +1,5 @@
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { CustomModal as Modal, CustomInput } from '../reusable';
 import { PlainButton, PrimaryButton as AddImageButton, Spinner } from '../reusable/Button';
 import { ButtonWrapper, ModalMessage, ModalTitle } from './styles';
@@ -16,7 +16,14 @@ export const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
 
   const dispatch = useAppDispatch();
 
-  const isLoading = useAppSelector(state => state.imageList.isLoading)
+  const isLoading: boolean = useAppSelector(state => state.imageList.isLoading)
+
+  useEffect(() => {
+    if (!isLoading && labelRef.current && urlRef.current) {
+      labelRef.current.value = '';
+      urlRef.current.value = '';
+    }
+  }, [isLoading])
 
   const handleAddImage = () => {
     const label = labelRef.current?.value?.trim();
@@ -39,8 +46,6 @@ export const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
         setIsError(false);
         setMessage('');  
   }
-
-
 
   return (
     <Modal height='367.2px' isOpen={isOpen} onClose={handleCloseModal}>

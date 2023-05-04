@@ -21,16 +21,13 @@ export const ImageListSlice = createSlice({
         selectImage: (state, action) => {
             state.selectedImageId = action.payload?.id;
           },
-        loading: (state, action: PayloadAction<Image> ) => {
-            state.images.push({...action.payload})
-        }
     },
     extraReducers: (builder) => {
         builder.addCase(fetchImageList.pending, (state,   action) => {
             state.isLoading = true;
         });
         builder.addCase(fetchImageList.fulfilled, (state,   action) => {
-            state.images = action.payload.data
+            state.images = action.payload.data;
             state.isLoading = false;
         });
         builder.addCase(addImage.pending, (state, action) => {
@@ -52,7 +49,6 @@ export const ImageListSlice = createSlice({
         });
         builder.addCase(searchImageList.fulfilled, (state,   action) => {
             state.images = action.payload.data;
-            state.isLoading = false;
         });
     }
 })
