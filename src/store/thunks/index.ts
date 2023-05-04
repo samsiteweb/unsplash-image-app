@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Image } from "../common/store.interface";
 
-const APIBASE:string  = (process.env.REACT_APP_API_BASE_URL_LOCAL as string)
+const APIBASE:string  = (process.env.REACT_APP_API_BASE_URL as string)
 
 export const fetchImageList = createAsyncThunk("imageList/fetch", async (thunkApi) => {
     const response : any = await fetch(`${APIBASE}/unsplash`, {
