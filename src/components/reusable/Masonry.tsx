@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, memo} from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
@@ -119,4 +119,4 @@ const ImageMasonry: React.FC<ImageMasonryProps> = ({ images, onImageDelete }) =>
   );
 };
 
-export default ImageMasonry;
+export default memo(ImageMasonry);
