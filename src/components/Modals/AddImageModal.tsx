@@ -3,8 +3,8 @@ import { useRef, useState, useEffect } from 'react';
 import { CustomModal as Modal, CustomInput } from '../reusable';
 import { PlainButton, PrimaryButton as AddImageButton, Spinner } from '../reusable/Button';
 import { ButtonWrapper, ModalMessage, ModalTitle } from './styles';
-import { useAppDispatch, useAppSelector } from '../../store/common/store';
-import { addImage } from '../../store/thunks';
+import { useAppDispatch, useAppSelector } from '../../redux/common/store';
+import { addImage } from '../../redux/slices/imageList/imageListThunks';
 
 export const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
 

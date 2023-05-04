@@ -1,11 +1,11 @@
 import { useRef, useState, useEffect } from 'react';
 import { DangerButton, PlainButton, Spinner } from '../reusable/Button';
 import { ButtonWrapper, ModalMessage, ModalTitle } from './styles';
-import { useAppDispatch, useAppSelector } from '../../store/common/store';
+import { useAppDispatch, useAppSelector } from '../../redux/common/store';
 import { useSelector } from 'react-redux';
-import { getSelectedImage } from '../../store/selectors';
+import { getSelectedImage } from '../../redux/slices/imageList/imageListSelectors';
 import { CustomInput, CustomModal as Modal } from '../reusable';
-import { deleteImage } from '../../store/thunks';
+import { deleteImage } from '../../redux/slices/imageList/imageListThunks';
 
 export const DeleteImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
   const passwordRef = useRef<HTMLInputElement>(null);

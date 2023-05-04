@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { ImageListSlice } from "../features"
+import { ImageListSlice } from "../slices/imageList/imageListSlice"
 
 
 export const store = configureStore({
