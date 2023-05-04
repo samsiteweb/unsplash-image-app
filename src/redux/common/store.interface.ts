@@ -6,8 +6,10 @@ export interface Image {
     updated_at: string
 }
 export interface ImageListState{
-    images: Image[]
+    images: Image[],
     msg: string,
     selectedImageId: string | null,
-    isLoading: boolean
+    isLoading: boolean,
+    isError: boolean,
+    errorMsg: string,
 }

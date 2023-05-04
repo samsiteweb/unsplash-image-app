@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Image, ImageListState } from "../../common/store.interface";
+import { createSlice } from "@reduxjs/toolkit";
+import { ImageListState } from "../../common/store.interface";
 import { addImage, deleteImage, fetchImageList, searchImageList } from "./imageListThunks";
 
 const initialState: ImageListState = {
@@ -7,6 +7,8 @@ const initialState: ImageListState = {
   isLoading: false,
   selectedImageId: null,
   msg: "",
+  isError: false,
+  errorMsg: ""
 };
 
 export const ImageListSlice = createSlice({
@@ -23,26 +25,32 @@ export const ImageListSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchImageList.pending, (state, action) => {
+        state.isError = false;
         state.isLoading = true;
       })
       .addCase(fetchImageList.fulfilled, (state, action) => {
         state.images.push(...action.payload.data);
+        state.isError = false;
         state.isLoading = false;
       })
       .addCase(fetchImageList.rejected, (state, action) => {
         state.isLoading = false;
-        state.msg = "Failed to fetch image list.";
+        state.isError = true;
+        state.errorMsg = "Failed to fetch image list.";
       })
       .addCase(addImage.pending, (state, action) => {
+        state.isError = false;
         state.isLoading = true;
       })
       .addCase(addImage.fulfilled, (state, action) => {
         state.images.unshift(action.payload.data);
         state.isLoading = false;
+        state.isError = false;
       })
       .addCase(addImage.rejected, (state, action) => {
         state.isLoading = false;
-        state.msg = "Failed to add image.";
+        state.isError = true;
+        state.errorMsg = "Failed to add image.";
       })
       .addCase(deleteImage.pending, (state, action) => {
         state.isLoading = true;
@@ -54,21 +62,26 @@ export const ImageListSlice = createSlice({
           );
         }
         state.isLoading = false;
+        state.isError = false;
       })
       .addCase(deleteImage.rejected, (state, action) => {
         state.isLoading = false;
-        state.msg = "Failed to delete image.";
+        state.isError = true;
+        state.errorMsg = "Failed to delete image.";
       })
       .addCase(searchImageList.pending, (state, action) => {
         state.isLoading = true;
+        state.isError = false;
       })
       .addCase(searchImageList.fulfilled, (state, action) => {
         state.images.splice(0, state.images.length, ...action.payload.data);
         state.isLoading = false;
+        state.isError = false;
       })
       .addCase(searchImageList.rejected, (state, action) => {
         state.isLoading = false;
-        state.msg = "Failed to search image list.";
+        state.isError = true;
+        state.errorMsg = "Failed to search image list.";
       });
   },
 });
