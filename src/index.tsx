@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 
-import { store } from './store/common/store'
+import { store } from './redux/common/store'
 import { Provider } from 'react-redux'
 import GlobalStyle from './styles/global';
 

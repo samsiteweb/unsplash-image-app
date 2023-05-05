@@ -2,8 +2,8 @@ import React, {useState, memo} from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import { selectImage } from "../../store/features";
-import { Image as StoredImage } from "../../store/common/store.interface"
+import { selectImage } from "../../redux/slices/imageList/imageListSlice";
+import { Image as StoredImage } from "../../redux/common/store.interface"
 import {DangerOutlineButton} from './Button'
 import { DeleteImageModal } from "../Modals/DeleteImageModal";
 

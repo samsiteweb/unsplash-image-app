@@ -1,11 +1,16 @@
 import { useRef, useState, useEffect } from 'react';
 import { DangerButton, PlainButton, Spinner } from '../reusable/Button';
 import { ButtonWrapper, ModalMessage, ModalTitle } from './styles';
-import { useAppDispatch, useAppSelector } from '../../store/common/store';
+import { useAppDispatch, useAppSelector } from '../../redux/common/store';
 import { useSelector } from 'react-redux';
-import { getSelectedImage } from '../../store/selectors';
+import { getSelectedImage } from '../../redux/slices/imageList/imageListSelectors';
 import { CustomInput, CustomModal as Modal } from '../reusable';
-import { deleteImage } from '../../store/thunks';
+import { deleteImage } from '../../redux/slices/imageList/imageListThunks';
+
+interface DeleteImageData {
+  id: string;
+  password: string;
+}
 
 export const DeleteImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -18,9 +23,9 @@ export const DeleteImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) =>
 
   const isLoading = useAppSelector((state) => state.imageList.isLoading);
 
-  const selectedImage: any = useSelector(getSelectedImage);
+  const selectedImage:any = useSelector(getSelectedImage);
 
-  const handleDeleteImage = () => {
+  const handleDeleteImage = async () => {
     const password = passwordRef.current?.value?.trim();
 
     if (!password) {
@@ -31,24 +36,43 @@ export const DeleteImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) =>
 
     if (password.length < 6) {
       setIsError(true);
-      setMessage('Please is at least six(6) characters long.');
+      setMessage('Password must be at least six(6) characters long.');
       return;
     }
 
-    const deleteImageData = {
-      id: selectedImage ? selectedImage?.id : '',
+    const deleteImageData: DeleteImageData = {
+      id: selectedImage ? selectedImage.id : '',
       password: passwordRef.current?.value ?? '',
     };
-    dispatch(deleteImage(deleteImageData));
-    setIsDeleting(true)
+    setIsDeleting(true);
+    try {
+      setMessage('');
+      setIsError(false);
+      const response = await dispatch(deleteImage(deleteImageData));
+      if (deleteImage.fulfilled.match(response)) {
+        const payload = response.payload;
+        if (payload.status === 'success') {
+          handleCloseModal();
+          setMessage('');
+        } else if (payload.status === 'error') {
+          setMessage(payload.message ?? "Eror deleting image");
+          setIsError(true);
+        }
+      }
+    } catch (error) {
+      setIsError(true);
+      setMessage('Error deleting image.');
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   useEffect(() => {
-    if (!isLoading && isDeleting) {
+    if (!isLoading && isDeleting && isError) {
       handleCloseModal();
-      setIsDeleting(false)
+      setIsDeleting(false);
     }
-  }, [isLoading, handleCloseModal]);
+  }, [isLoading, handleCloseModal, isDeleting, isError]);
 
   const handleClose = () => {
     setIsError(false);
@@ -70,7 +94,7 @@ export const DeleteImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) =>
       <ButtonWrapper>
         <PlainButton onClick={handleClose}>Cancel</PlainButton>
         <DangerButton onClick={handleDeleteImage}>
-          {isLoading ? <Spinner /> : 'delete'}
+          {isLoading ? <Spinner /> : 'Delete'}
         </DangerButton>
       </ButtonWrapper>
     </Modal>

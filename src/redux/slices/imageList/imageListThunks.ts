@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Image } from "../common/store.interface";
+import { Image } from "../../common/store.interface";
 
 const APIBASE:string  = (process.env.REACT_APP_API_BASE_URL as string)
 

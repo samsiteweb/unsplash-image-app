@@ -10,8 +10,8 @@ import {
 } from "./styles"
 import CustomInput from '../reusable/CustomInput';
 import debounce from '../../utility/helperFunctions';
-import { useAppDispatch, useAppSelector } from '../../store/common/store';
-import { searchImageList } from '../../store/thunks';
+import { useAppDispatch, useAppSelector } from '../../redux/common/store';
+import { searchImageList } from '../../redux/slices/imageList/imageListThunks';
 import { AddImageModal } from '../Modals/AddImageModal';
 
 

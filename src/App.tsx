@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import Navbar from './components/navbar';
 import { Masonry as ImageMasonry } from './components/reusable';
 import { LoaderSpinner } from './components/reusable/Button';
-import { useAppDispatch, useAppSelector } from './store/common/store';
-import { fetchImageList } from './store/thunks';
+import { useAppDispatch, useAppSelector } from './redux/common/store';
+import { fetchImageList } from './redux/slices/imageList/imageListThunks';
 import { AppContainer, BodyLoaderWrapper } from './styles/global';
 
 const App: React.FC = () => {
