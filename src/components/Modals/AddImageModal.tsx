@@ -45,6 +45,7 @@ export const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
  const handleClose = () => { 
         setIsError(false);
         setMessage('');  
+        handleCloseModal()
   }
 
   return (
@@ -54,7 +55,7 @@ export const AddImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) => {
       <CustomInput ref={labelRef} width="100%" label="Label" placeholder="Suspendisse elit massa" />
       <CustomInput ref={urlRef} width="100%" label="Photo Url" placeholder="Suspendisse elit massa" />
       <ButtonWrapper>
-        <PlainButton onClick={() => {handleCloseModal(); handleClose()}}>Cancel</PlainButton>
+        <PlainButton onClick={handleClose}>Cancel</PlainButton>
         <AddImageButton  disabled={isLoading} onClick={handleAddImage}> { isLoading ? <Spinner/>  : "Add image" } </AddImageButton>
       </ButtonWrapper>
     </Modal>
