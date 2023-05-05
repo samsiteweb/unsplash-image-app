@@ -94,7 +94,7 @@ export const DeleteImageModal: React.FC<any> = ({ isOpen, handleCloseModal }) =>
       <ButtonWrapper>
         <PlainButton onClick={handleClose}>Cancel</PlainButton>
         <DangerButton onClick={handleDeleteImage}>
-          {isLoading ? <Spinner /> : 'delete'}
+          {isLoading ? <Spinner /> : 'Delete'}
         </DangerButton>
       </ButtonWrapper>
     </Modal>
