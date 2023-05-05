@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Image } from "../../common/store.interface";
 
-const APIBASE:string  = (process.env.REACT_APP_API_BASE_URL as string)
+const APIBASE:string  = (process.env.REACT_APP_API_BASE_URL_LOCAL as string)
 
 export const fetchImageList = createAsyncThunk("imageList/fetch", async (thunkApi) => {
     const response : any = await fetch(`${APIBASE}/unsplash`, {
@@ -13,7 +13,7 @@ export const fetchImageList = createAsyncThunk("imageList/fetch", async (thunkAp
 
 export const searchImageList = createAsyncThunk("imageList/search", async (queryString:string, thunkApi) => {
     const response : any = await fetch(`${APIBASE}/unsplash/search?queryString=${queryString}`, {
-        method: "POST",
+        method: "GET",
     });
     const data = response.json();
     return data;
@@ -34,7 +34,7 @@ export const addImage = createAsyncThunk("imageList/save", async (payload:Partia
 
 
 export const deleteImage = createAsyncThunk("imageList/delete", async ({id, password}: {id: string, password:string}, thunkApi) => {
-    const response = await fetch(`${APIBASE}/unsplash?id=${id}`, {
+    const response = await fetch(`${APIBASE}/unsplash/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
