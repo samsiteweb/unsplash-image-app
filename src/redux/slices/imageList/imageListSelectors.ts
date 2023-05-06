@@ -9,6 +9,7 @@ export const  useImageListLoadingStatus = ()  =>{
 
 const getImageList = (state: RootState) => state.imageList.images;
 const getImageListId:any = (state: RootState) => state.imageList.selectedImageId;
+
 export const getSelectedImage = createSelector(
   getImageList,
   getImageListId,
